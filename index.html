@@ -9,27 +9,19 @@
 			$( document ).ready(function() {
 				$('#submit').click(function(){
 				var text = encodeURIComponent($('#translate').val());
-				$.ajax({
-				  url: 'https://cors-proxy.taskcluster.net/request',
-				  method: 'POST',
-				  contentType: 'application/json',
-				  data: {
-					url: 'http://draconic.twilightrealm.com/mini.php?action=ctd&text='+text+'&translate=Translate',
-				  }
-				}).done(function(res) {
-				  console.log(res);
+
+				$.post( "http://draconic.twilightrealm.com/mini.php?action=ctd&text="+text+"&translate=Translate", function( data ) {
+				  var parsedHtml = $.parseHTML( data );
+				  var translated = $(parsedHtml).find('input[name="text"]')[1].value;
+				  console.log(translated);
+				  $('#translated_text').html(translated);
+				  $( "#output_div" ).html(translateString(selectedLanguage,translated));
 				});
-				
-					/*
-					$.post( "http://draconic.twilightrealm.com/mini.php?action=ctd&text='+text+'&translate=Translate", function( data ) {
-					  console.log(data);
-					  $( "#output_div" ).html( data );
-					});
-					*/
+					
 				});
 				
 				
-				$( "#output_div" ).html(translateString(selectedLanguage,message));
+				
 			});
 			
 			function translateString(language,message)
@@ -130,6 +122,7 @@
 	<body>
 		<input id="translate" type="text" value="with this vile ichor so ends the age of man"><button id="submit" name="submit" value="Translate">Translate</button>
 		
+		<div id="translated_text"></div>
 		<div id="output_div">
 		
 		</div>
