@@ -9,12 +9,25 @@
 			$( document ).ready(function() {
 				$('#submit').click(function(){
 				var text = encodeURIComponent($('#translate').val());
+				$.ajax({
+				  url: 'https://cors-proxy.taskcluster.net/request',
+				  method: 'POST',
+				  contentType: 'application/json',
+				  data: {
+					url: 'http://draconic.twilightrealm.com/mini.php?action=ctd&text='+text+'&translate=Translate',
+				  }
+				}).done(function(res) {
+				  console.log(res);
+				});
 				
-				$.post( "http://draconic.twilightrealm.com/mini.php?action=ctd&text='+text+'&translate=Translate", function( data ) {
+					/*
+					$.post( "http://draconic.twilightrealm.com/mini.php?action=ctd&text='+text+'&translate=Translate", function( data ) {
 					  console.log(data);
 					  $( "#output_div" ).html( data );
 					});
+					*/
 				});
+				
 				
 				$( "#output_div" ).html(translateString(selectedLanguage,message));
 			});
