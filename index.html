@@ -2,6 +2,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<head>
 		<script>
+			var selectedLanguage = 'draconic';
+			var message = 'with this vile ichor so ends the age of man';
+			var glyphWidth = 60;
+			var glyphHeight = 60;
 			$( document ).ready(function() {
 				$('#submit').click(function(){
 				var text = encodeURIComponent($('#translate').val());
@@ -11,7 +15,27 @@
 					  $( "#output_div" ).html( data );
 					});
 				});
+				
+				$( "#output_div" ).html(translateString(selectedLanguage,message));
 			});
+			
+			function translateString(language,message)
+			{
+				var returnString = '';
+				
+				for (var i = 0, len = message.length; i < len; i++) {
+					if(message[i] == ' ')
+					{
+						returnString += '<img src="'+language+'/space.png" width="'+glyphWidth+'" height="'+glyphHeight+'">';
+					}
+					else
+					{
+						returnString += '<img src="'+language+'/'+message[i]+'.png" width="'+glyphWidth+'" height="'+glyphHeight+'" title="'+message[i]+'">';
+					}
+				}
+				
+				return returnString;
+			}
 		</script>
 		<style>
 
