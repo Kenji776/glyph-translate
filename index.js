@@ -3,6 +3,7 @@ const axios = require('axios');
 var http = require('http');
 var fs = require('fs');
 var DomParser = require('dom-parser');
+const PORT = process.env.PORT || 3000;
 var parser = new DomParser();
 var glyphWidth = 60;
 var glyphHeight = 60;
@@ -132,7 +133,6 @@ function base64_encode(file) {
 	}
 }
 			
-const port = 3000
 const host = '127.0.0.1'
 server.listen(port, host)
 console.log(`Listening at http://${host}:${port}`)
