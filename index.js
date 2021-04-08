@@ -45,7 +45,7 @@ const server = http.createServer(function(request, response) {
     var html = `
             <html>
                 <body>
-                    <form method="post" action="http://localhost:3000">Tex to Translate: 
+                    <form method="post" action="">Tex to Translate: 
                         <input type="text" name="text" />
                         <input type="submit" value="Submit" />
                     </form>
