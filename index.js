@@ -4,10 +4,9 @@ var glyphWidth = 60;
 var glyphHeight = 60;
 var port = process.env.PORT || 5000;
 var selectedLanguage = 'draconic';
-var dictionary;
-const server = http.createServer(function(request, response) {
+var dictionary = readDictionary(selectedLanguage);
 
-	dictionary = readDictionary(selectedLanguage);
+const server = http.createServer(function(request, response) {
 
 	if (request.method == 'POST') {
 		var body = ''
