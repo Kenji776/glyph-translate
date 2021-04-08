@@ -6,19 +6,27 @@
 			var message = 'with this vile ichor so ends the age of man';
 			var glyphWidth = 60;
 			var glyphHeight = 60;
-			$( document ).ready(function() {
-				$('#submit').click(function(){
-				var text = encodeURIComponent($('#translate').val());
+			$( document ).ready(function() 
+			{
+				try
+				{
+					$('#submit').click(function(){
+					var text = encodeURIComponent($('#translate').val());
 
-				$.post( "https://draconic.twilightrealm.com/mini.php?action=ctd&text="+text+"&translate=Translate", function( data ) {
-				  var parsedHtml = $.parseHTML( data );
-				  var translated = $(parsedHtml).find('input[name="text"]')[1].value;
-				  console.log(translated);
-				  $('#translated_text').html(translated);
-				  $( "#output_div" ).html(translateString(selectedLanguage,translated));
-				});
-					
-				});
+					$.post( "https://draconic.twilightrealm.com/mini.php?action=ctd&text="+text+"&translate=Translate", function( data ) {
+					  var parsedHtml = $.parseHTML( data );
+					  var translated = $(parsedHtml).find('input[name="text"]')[1].value;
+					  console.log(translated);
+					  $('#translated_text').html(translated);
+					  $( "#output_div" ).html(translateString(selectedLanguage,translated));
+					});
+						
+					});
+				}
+				catch(err)
+				{
+					alert(err.message);
+				}
 				
 				
 				
