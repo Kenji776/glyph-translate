@@ -1,0 +1,26 @@
+{
+  "name": "glyph-translate",
+  "version": "1.0.0",
+  "description": "Translate text to glyphs",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dom-parser": "^0.1.6",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kenji776/glyph-translate.git"
+  },
+  "author": "Kenji776@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kenji776/glyph-translate/issues"
+  },
+  "homepage": "https://github.com/Kenji776/glyph-translate#readme"
+}
