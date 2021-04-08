@@ -48,7 +48,9 @@ const server = http.createServer(function(request, response) {
 						<form method="post" action="">Tex to Translate: 
 							<textarea name="text" rows="5" cols="400" /></textarea><br/>
 							<input type="submit" value="Submit" />
-						</form>
+						</form><br><br>
+						
+						Credit to https://draconic.twilightrealm.com/ for providing translations.
 					</body>
 				</html>`
 		response.writeHead(200, {
