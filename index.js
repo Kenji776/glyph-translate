@@ -30,10 +30,10 @@ const server = http.createServer(function(request, response) {
 		  response.write('<p><h2>Text Translation: ' + data + '</h2></p>');
 		  if(!err)
 		  {
-			var glyphHtml = translateStringToGlyphs('draconic',data)
+			var glyphHtml = translateStringToGlyphs('draconic',data, response)
 
-			
-			response.end(glyphHtml) 
+			//response.end(glyphHtml);
+			response.end(null);
 		  }
 		  else
 		  {
@@ -105,40 +105,54 @@ function extractAttribute(nodeAttributes, attributeName)
 	return '';
 }
 
-function translateStringToGlyphs(language,message)
+function translateStringToGlyphs(language,message,response)
 {
 	var returnString = '';
+	var imgTag;
+	var converted = {};
 	
-	for (var i = 0, len = message.length; i < len; i++) {
-		if(message[i] == ' ')
+	for (var i = 0, len = message.length; i < len; i++) 
+	{
+		var letter = message[i];
+		//if its an empty space change it to the word 'space' so it can be found in the glyph collection
+		if(letter == ' ')
 		{
-			//var imageString = port != 5000 ? language+'/space.png' : 'data:image/png;base64,'+base64_encode(language+'/space.png')
-			var imageString = 'data:image/png;base64,'+base64_encode(language+'/space.png');
-			if(imageString != '') returnString += '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'">';
+			letter = 'space';
 		}
-		else
+		
+		//if the conversion map doesn't have this letter already stored then convert it. Otherwise we can just get it from the collection.
+		if(!converted.hasOwnProperty(letter))
 		{
-			//var imageString = port != 5000 ? language+'/'+message[i]+'.png' : 'data:image/png;base64,'+base64_encode(language+'/'+message[i]+'.png' );
-			var imageString = 'data:image/png;base64,'+base64_encode(language+'/'+message[i]+'.png' );
-			if(imageString != '') returnString += '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'" title="'+message[i]+'">';
+			converted[letter] = base64_encode(language,letter+'.png' )
 		}
+		
+		//create the contents of the src tag for the img tag
+		var imageString = 'data:image/png;base64,'+converted[letter];
+		
+		//create the actual img tag
+		imgTag = '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'" title="'+letter+'">';
+		
+		//write the response to the document so it will build as it goes.
+		response.write(imgTag);
+		returnString += imgTag;
 	}
 	
 	return returnString;
 }
 
-function base64_encode(file) {
+function base64_encode(folder,file) {
 	try
 	{
 		// read binary data
-		var bitmap = fs.readFileSync(file);
+		var bitmap = fs.readFileSync(folder+'/'+file);
 		// convert binary data to base64 encoded string
 		return new Buffer(bitmap).toString('base64');
 	}
 	catch(err)
 	{
 		console.log('No translation glyph for ' + file);
-		return '';
+		var bitmap = fs.readFileSync(folder+'/missing.png');
+		return new Buffer(bitmap).toString('base64');
 	}
 }
 console.log('Listening on port: '+ port);
