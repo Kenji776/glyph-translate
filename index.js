@@ -3,11 +3,10 @@ const axios = require('axios');
 var http = require('http');
 var fs = require('fs');
 var DomParser = require('dom-parser');
-const port= process.env.PORT || 3000;
 var parser = new DomParser();
 var glyphWidth = 60;
 var glyphHeight = 60;
-
+var port = process.env.PORT || 5000;
 const server = http.createServer(function(request, response) {
 	
 
@@ -55,7 +54,7 @@ const server = http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type': 'text/html'})
     response.end(html)
   }
-})
+}).listen(port)
 
 async function callDraconicTranslate(textString,callback)
 {
@@ -132,7 +131,4 @@ function base64_encode(file) {
 		return '';
 	}
 }
-			
-const host = '127.0.0.1'
-server.listen(port, host)
-console.log(`Listening at http://${host}:${port}`)
+console.log('Listening on port: '+ port);
