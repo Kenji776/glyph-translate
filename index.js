@@ -30,7 +30,7 @@ const server = http.createServer(function(request, response) {
 
 			response.write('<p><h2>Text Translation: ' + translatedText + '</h2></p>');
 
-			var glyphHtml = translateStringToGlyphs('draconic', translatedText, response)
+			var glyphHtml = translateStringToGlyphs(selectedLanguage, translatedText, response)
 
 			response.end(null);
 
@@ -126,12 +126,15 @@ function translateString(message) {
 }
 
 function findWord(word) {
-    for (var i = 0; i < dictionary.length; i++) {
-        // look for the entry with a matching `code` value
-        if (dictionary[i].Common == word) {
-            return dictionary[i].Translation;
-        }
-    }
+	if(dictionary)
+	{
+		for (var i = 0; i < dictionary.length; i++) {
+			// look for the entry with a matching `code` value
+			if (dictionary[i].Common == word) {
+				return dictionary[i].Translation;
+			}
+		}
+	}
     return word;
 }
 console.log('Listening on port: ' + port);
