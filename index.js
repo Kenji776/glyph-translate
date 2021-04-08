@@ -41,7 +41,10 @@ const server = http.createServer(function(request, response) {
 		  }
 	  });
     })
-  } else {
+  }
+  else if (request.method == 'GET' && request.url == '/')
+  {
+	console.log(request.url);
     var html = `
             <html>
                 <body>
@@ -109,13 +112,13 @@ function translateStringToGlyphs(language,message)
 	for (var i = 0, len = message.length; i < len; i++) {
 		if(message[i] == ' ')
 		{
-			var imageString = base64_encode(language+'/space.png')
-			if(imageString != '') returnString += '<img src="data:image/png;base64,'+imageString+ '" width="'+glyphWidth+'" height="'+glyphHeight+'">';
+			var imageString = port != 5000 ? language+'/space.png' : 'data:image/png;base64,'+base64_encode(language+'/space.png')
+			if(imageString != '') returnString += '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'">';
 		}
 		else
 		{
-			var imageString = base64_encode(language+'/'+message[i]+'.png' );
-			if(imageString != '') returnString += '<img src="data:image/png;base64,'+imageString+ '" width="'+glyphWidth+'" height="'+glyphHeight+'" title="'+message[i]+'">';
+			var imageString = port != 5000 ? language+'/'+message[i]+'.png' : 'data:image/png;base64,'+base64_encode(language+'/'+message[i]+'.png' );
+			if(imageString != '') returnString += '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'" title="'+message[i]+'">';
 		}
 	}
 	
