@@ -112,12 +112,14 @@ function translateStringToGlyphs(language,message)
 	for (var i = 0, len = message.length; i < len; i++) {
 		if(message[i] == ' ')
 		{
-			var imageString = port != 5000 ? language+'/space.png' : 'data:image/png;base64,'+base64_encode(language+'/space.png')
+			//var imageString = port != 5000 ? language+'/space.png' : 'data:image/png;base64,'+base64_encode(language+'/space.png')
+			var imageString = 'data:image/png;base64,'+base64_encode(language+'/space.png');
 			if(imageString != '') returnString += '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'">';
 		}
 		else
 		{
-			var imageString = port != 5000 ? language+'/'+message[i]+'.png' : 'data:image/png;base64,'+base64_encode(language+'/'+message[i]+'.png' );
+			//var imageString = port != 5000 ? language+'/'+message[i]+'.png' : 'data:image/png;base64,'+base64_encode(language+'/'+message[i]+'.png' );
+			var imageString = 'data:image/png;base64,'+base64_encode(language+'/'+message[i]+'.png' );
 			if(imageString != '') returnString += '<img src="'+imageString+'" width="'+glyphWidth+'" height="'+glyphHeight+'" title="'+message[i]+'">';
 		}
 	}
