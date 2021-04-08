@@ -4,7 +4,7 @@ var glyphWidth = 60;
 var glyphHeight = 60;
 var port = process.env.PORT || 5000;
 var selectedLanguage = 'draconic';
-var dictionary = readDictionary(selectedLanguage);
+var dictionary = [];
 
 const server = http.createServer(function(request, response) {
 
@@ -104,15 +104,13 @@ function base64_encode(folder, file) {
 }
 
 function readDictionary(language) {
-    fs.readFile(language+'/dictionary.json', 'utf8', (err, data) => {
-        if (err) {
-            console.log(`Error reading file from disk: ${err}`);
-        } else {
+    var data = fs.readFileSync(language+'/dictionary.json', 'utf8');
 
-            // parse JSON string to JSON object
-            return JSON.parse(data);
-        }
-    });
+	// parse JSON string to JSON object
+	var dictionaryData = JSON.parse(data);
+	
+	console.log('Loaded ' + language + ' dictionary with ' + Object.keys(dictionaryData).length + ' words');
+	return dictionaryData;
 }
 
 function translateString(message) {
@@ -134,6 +132,12 @@ function findWord(word) {
 			}
 		}
 	}
+	else
+	{
+		console.log('No dictionary available for translation!');
+	}
     return word;
 }
 console.log('Listening on port: ' + port);
+
+dictionary = readDictionary(selectedLanguage);
