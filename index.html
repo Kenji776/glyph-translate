@@ -10,7 +10,7 @@
 				$('#submit').click(function(){
 				var text = encodeURIComponent($('#translate').val());
 
-				$.post( "http://draconic.twilightrealm.com/mini.php?action=ctd&text="+text+"&translate=Translate", function( data ) {
+				$.post( "https://draconic.twilightrealm.com/mini.php?action=ctd&text="+text+"&translate=Translate", function( data ) {
 				  var parsedHtml = $.parseHTML( data );
 				  var translated = $(parsedHtml).find('input[name="text"]')[1].value;
 				  console.log(translated);
