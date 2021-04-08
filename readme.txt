@@ -9,3 +9,5 @@ To use:
 3) Open a browser tab to http://localhost:5000/
 4) Enter your message and click submit.
 5) Your message should be translated into draconic text and glyphs.
+
+Check out https://draconic-translator.herokuapp.com/ to see it in action.
