@@ -19,7 +19,7 @@ const server = http.createServer(function(request, response) {
 				'Content-Type': 'text/html'
 			})
 
-			var inputValue = decodeURIComponent((body.split('=')[1]).replace(/\+/g, ' '));
+			var inputValue = decodeURIComponent((body.split('=')[1]).replace(/\+/g, ' ')).toLowerCase();
 
 			console.log('Translating ' + inputValue);
 
@@ -119,7 +119,7 @@ function translateString(message) {
     var allWords = message.split(' ');
     var translation = '';
     for (var i = 0; i < allWords.length; i++) {
-        translation += findWord(allWords[i]);
+        translation += findWord(allWords[i]) + ' ';
     }
     return translation;
 }
