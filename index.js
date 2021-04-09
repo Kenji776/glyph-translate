@@ -46,7 +46,7 @@ const server = http.createServer(function(request, response) {
 						</center>
 						<p>A simple application for converting text into draconic glyphs. Originally used for calligraphy practice</p>
 						<form method="post" action="">Tex to Translate: 
-							<textarea name="text" rows="5" cols="400" /></textarea><br/>
+							<textarea name="text" rows="5" style="width:100%"/></textarea><br/>
 							<input type="submit" value="Submit" />
 						</form><br><br>
 						
