@@ -35,7 +35,7 @@ const server = http.createServer(function(request, response) {
 
 		});
 	}
-	else if (request.method == 'GET' && request.url == '/') {
+	else if (request.method == 'GET') {
 		console.log(request.url);
 		var html = `
 				<html>
